@@ -40,7 +40,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(todoItems);
   return (
     <div className="container-fluid text-center mt-4">
       <div>

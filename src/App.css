@@ -59,6 +59,24 @@ body {
   box-shadow: 0 1px 0 #091e4240;
 }
 
+/* width */
+.card-items::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+.card-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+.card-items::-webkit-scrollbar-thumb {
+  background: rgb(175, 175, 175);
+  border-radius: 5px;
+}
+/* Handle on hover */
+.card-items::-webkit-scrollbar-thumb:hover {
+  background: rgb(155, 155, 155);
+}
+
 .skeleton-items {
   animation: skeleton-loading 1s linear infinite alternate;
   -webkit-animation: skeleton-loading 1s linear infinite alternate;
