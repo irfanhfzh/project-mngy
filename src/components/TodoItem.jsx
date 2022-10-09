@@ -8,7 +8,7 @@ const TodoItem = (props) => {
         >
           <p
             className="text-white fw-bold px-2 mb-0"
-            style={{ fontSize: ".75rem" }}
+            style={{ fontSize: ".75rem", paddingBlock: ".15rem" }}
           >
             User {props.userID}
           </p>

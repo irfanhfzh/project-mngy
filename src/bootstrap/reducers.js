@@ -9,48 +9,35 @@ const reducers = (state = initialStates, action) => {
     case ACTION.GET_TODOS:
       return {
         ...state,
-        isLoading: true,
-        isError: false,
       };
     case ACTION.GET_TODOS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isInitialLoading: false,
         todoItems: payload,
       };
     case ACTION.GET_TODOS_FAILED:
       return {
         ...state,
-        isLoading: false,
-        isInitialLoading: false,
-        isInitialLoadingError: true,
       };
     case ACTION.DELETE_TODOS:
       return {
         ...state,
         todoItems: [],
       };
+
     // Get Todo Item from Users
     case ACTION.GET_USERS_TODOS:
       return {
         ...state,
-        isLoading: true,
-        isError: false,
       };
     case ACTION.GET_USERS_TODOS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isInitialLoading: false,
         usersTodoItem: payload,
       };
     case ACTION.GET_USERS_TODOS_FAILED:
       return {
         ...state,
-        isLoading: false,
-        isInitialLoading: false,
-        isInitialLoadingError: true,
       };
     case ACTION.DELETE_USERS_TODOS:
       return {
