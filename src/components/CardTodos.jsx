@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
+import SkeletonTodoItem from "./SkeletonTodoItem";
 import TodoItem from "./TodoItem";
 
 const CardTodos = () => {
   const { todoItems } = useSelector((state) => state.todoItems);
+  const { usersTodoItem } = useSelector((state) => state.usersTodoItem);
 
   return (
     <>
@@ -16,12 +18,34 @@ const CardTodos = () => {
           </h5>
         </div>
         <div className="text-start card-items">
-          {todoItems.map((item, index) =>
-            item.completed === false && item.userId === 1 ? (
-              <TodoItem key={index} text={item.title} />
-            ) : (
-              ""
+          {todoItems.length === 200 ? (
+            todoItems.map(
+              (item, index) =>
+                item.completed === false && (
+                  <TodoItem
+                    key={index}
+                    userID={item.userId}
+                    text={item.title}
+                  />
+                )
             )
+          ) : usersTodoItem.length > 0 ? (
+            usersTodoItem.map((item, index) =>
+              item.completed === false ? (
+                <TodoItem key={index} userID={item.userId} text={item.title} />
+              ) : (
+                ""
+              )
+            )
+          ) : (
+            <>
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+            </>
           )}
         </div>
       </div>

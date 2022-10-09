@@ -1,6 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodo } from "./bootstrap/actions";
+import {
+  deleteTodos,
+  deleteUsersTodo,
+  getTodo,
+  getUsersTodo,
+} from "./bootstrap/actions";
 import ProfilePicture from "./assets/profile-img.png";
 import CardTodos from "./components/CardTodos";
 import CardInProgress from "./components/CardInProgress";
@@ -10,14 +15,29 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const { todoItems } = useSelector((state) => state.todoItems);
+  const { usersTodoItem } = useSelector((state) => state.usersTodoItem);
+  const [changeUsers, setChangeUsers] = useState(0);
+
+  const handleChangeUser = (e) => {
+    setChangeUsers(e.target.value);
+  };
+
+  const handleGetUsersData = () => {
+    dispatch(deleteUsersTodo());
+    dispatch(getUsersTodo(parseInt(changeUsers)));
+    dispatch(deleteTodos());
+  };
 
   const handleGetData = () => {
     dispatch(getTodo());
-    console.log(todoItems.map((item) => item.completed === true));
+    dispatch(deleteUsersTodo());
   };
 
   useEffect(() => {
-    dispatch(getTodo());
+    if (!todoItems.length) {
+      dispatch(getTodo());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(todoItems);
@@ -40,18 +60,37 @@ function App() {
                   style={{ width: "5rem", height: "5rem", objectFit: "cover" }}
                 />
               </div>
-              <h4 className="card-title fw-semibold">User 1</h4>
+              <h4 className="card-title fw-semibold">
+                {todoItems.length === 200
+                  ? "All User"
+                  : usersTodoItem.length > 0
+                  ? usersTodoItem
+                      .slice(0, 1)
+                      .map((item) => "User " + item.userId)
+                  : ". . . . ."}
+              </h4>
               <div className="d-flex align-items-center justify-content-center gap-2 my-3">
                 <select
                   className="form-select form-select-sm"
                   aria-label=".form-select-sm example"
+                  onChange={handleChangeUser}
                 >
                   <option>Ganti User</option>
                   <option value={1}>User 1</option>
                   <option value={2}>User 2</option>
                   <option value={3}>User 3</option>
+                  <option value={4}>User 4</option>
+                  <option value={5}>User 5</option>
+                  <option value={6}>User 6</option>
+                  <option value={7}>User 7</option>
+                  <option value={8}>User 8</option>
+                  <option value={9}>User 9</option>
+                  <option value={10}>User 10</option>
                 </select>
-                <p className="btn btn-sm btn-primary fw-semibold mb-0">
+                <p
+                  className="btn btn-sm btn-primary fw-semibold mb-0"
+                  onClick={() => handleGetUsersData()}
+                >
                   Get Data
                 </p>
               </div>

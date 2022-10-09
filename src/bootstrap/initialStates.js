@@ -1,5 +1,6 @@
 const initialStates = {
   todoItems: [],
+  usersTodoItem: [],
   isInitialLoading: true,
   isInitialLoadingError: false,
   isLoading: false,

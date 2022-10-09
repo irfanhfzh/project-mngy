@@ -6,3 +6,4 @@ const api = axios.create({
 });
 
 export const getTodoApi = () => api.get("/todos");
+export const getUsersTodoApi = (userId) => api.get(`/users/${userId}/todos`);

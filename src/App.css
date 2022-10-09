@@ -39,7 +39,6 @@ body {
   width: -webkit-fill-available;
   width: -moz-available;
   height: calc(100vh - 156.8px);
-  /* background-color: tomato; */
 }
 
 .card {
@@ -58,4 +57,18 @@ body {
 
 .card-item {
   box-shadow: 0 1px 0 #091e4240;
+}
+
+.skeleton-items {
+  animation: skeleton-loading 1s linear infinite alternate;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
 }

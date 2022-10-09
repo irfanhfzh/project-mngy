@@ -1,9 +1,6 @@
-// import { useSelector } from "react-redux";
-import TodoItem from "./TodoItem";
+import SkeletonTodoItem from "./SkeletonTodoItem";
 
 const CardInProgress = () => {
-  // const { todoItems } = useSelector((state) => state.todoItems);
-
   return (
     <>
       <div className="card card-todos">
@@ -16,7 +13,14 @@ const CardInProgress = () => {
           </h5>
         </div>
         <div className="text-start card-items">
-          <TodoItem text="Mau Nasi Goreng" InputID="flexCheckIndeterminate" />
+          <>
+            <SkeletonTodoItem />
+            <SkeletonTodoItem />
+            <SkeletonTodoItem />
+            <SkeletonTodoItem />
+            <SkeletonTodoItem />
+            <SkeletonTodoItem />
+          </>
         </div>
       </div>
     </>

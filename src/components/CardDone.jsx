@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
+import SkeletonTodoItem from "./SkeletonTodoItem";
 import TodoItem from "./TodoItem";
 
 const CardDone = () => {
   const { todoItems } = useSelector((state) => state.todoItems);
+  const { usersTodoItem } = useSelector((state) => state.usersTodoItem);
 
   return (
     <>
@@ -16,16 +18,47 @@ const CardDone = () => {
           </h5>
         </div>
         <div className="text-start card-items">
-          {todoItems.map(
-            (item, index) =>
-              item.completed === true && (
-                <TodoItem
-                  key={index}
-                  text={item.title}
-                  style={{ opacity: "0.5", textDecorationLine: "line-through" }}
-                  InputID="flexCheckChecked"
-                />
-              )
+          {todoItems.length === 200 ? (
+            todoItems.map(
+              (item, index) =>
+                item.completed === true && (
+                  <TodoItem
+                    key={index}
+                    userID={item.userId}
+                    text={item.title}
+                    style={{
+                      opacity: "0.5",
+                      textDecorationLine: "line-through",
+                    }}
+                    InputID="flexCheckChecked"
+                  />
+                )
+            )
+          ) : usersTodoItem.length > 0 ? (
+            usersTodoItem.map(
+              (item, index) =>
+                item.completed === true && (
+                  <TodoItem
+                    key={index}
+                    userID={item.userId}
+                    text={item.title}
+                    style={{
+                      opacity: "0.5",
+                      textDecorationLine: "line-through",
+                    }}
+                    InputID="flexCheckChecked"
+                  />
+                )
+            )
+          ) : (
+            <>
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+              <SkeletonTodoItem />
+            </>
           )}
         </div>
       </div>
