@@ -1,17 +1,25 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import * as ACTION from "./actions";
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
+import { getTodoFailed, getTodoSuccess } from "./actions";
 import * as API from "./apis";
+import * as ACTION from "./actions";
 
-function* getTodosFetch() {
-  // Call API
-  const todos = yield call(API.getTodos);
-
-  // Success
-  yield put({ type: ACTION.GET_TODOS_SUCCESS, todos });
+function* getTodos() {
+  try {
+    const response = yield call(API.getTodoApi);
+    yield put(getTodoSuccess(response?.data));
+  } catch (error) {
+    yield put(getTodoFailed(error.response?.data));
+  }
 }
 
-function* mySaga() {
-  yield takeEvery(ACTION.GET_TODOS_FETCH, getTodosFetch);
+function* getTodoSaga() {
+  yield takeLatest(ACTION.GET_TODOS, getTodos);
 }
 
-export default mySaga;
+const bootstrap = [fork(getTodoSaga)];
+
+function* mySagas() {
+  yield all([...bootstrap]);
+}
+
+export default mySagas;
