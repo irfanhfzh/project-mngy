@@ -34,10 +34,7 @@ body {
 }
 
 .todos-wrapper {
-	width: -webkit-fill-available;
-	width: -moz-available;
 	height: calc(100vh - 156.8px);
-	/* height: 100vh; */
 }
 
 .card {
@@ -45,7 +42,7 @@ body {
 }
 
 .card-todos {
-	max-width: 337px;
+	width: inherit;
 	background-color: #ebecf0 !important;
 }
 
@@ -100,4 +97,10 @@ body {
 	}
 }
 @media screen and (max-width: 992px) {
+	.card.card-todos {
+		height: 300px;
+	}
+	.card-todos {
+		max-width: 337px;
+	}
 }
