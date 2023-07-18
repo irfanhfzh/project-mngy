@@ -61,9 +61,13 @@ function App() {
 	};
 
 	useEffect(() => {
-		if (!todoItems.length) {
+		if (!todoItems.length && !isUsersChange) {
 			dispatch(getTodo());
-		} else {
+		}
+	}, [todoItems, isUsersChange]);
+
+	useEffect(() => {
+		if (todoItems.length) {
 			setUsers(todoItems.filter((item) => item.userId));
 		}
 	}, [todoItems]);
